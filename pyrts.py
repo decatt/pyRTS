@@ -41,6 +41,8 @@ RESOURCES=8
 NOTHING=9
 
 #action
+NUMACTION = 9
+
 MOVE = 0
 ATTACK = 1
 HARVEST = 2
@@ -51,15 +53,15 @@ RIGHT = 6
 DOWN = 7
 LEFT = 8
 
-worker_hp = 1
-worker_atk = 1
-woker_atk_range = 1
-soldier_hp = 4
-soldier_atk = 1
-soldier_atk_range = 1
-base_hp = 10
-barracks_hp = 5
-num_init_resource = 25
+WORKER_HP = 1
+WORKER_ATK = 1
+WORKER_ATK_RANGE = 1
+SOLDIER_HP = 4
+SOLDIER_ATK = 1
+SOLDIER_ATK_RANGE = 1
+BASE_HP = 10
+BARRACKS_HP = 5
+NUM_INTI_RESOURCE = 25
 
 
 class RTSENV:
@@ -127,14 +129,14 @@ class RTSENV:
                                     elif state[pos][PRODUCING] == 1 and  state[target][NONE] == 1:
                                         if state[pos][BARRACKS] == 1:
                                             if allay == PLAYER1:
-                                                state[target] = numpy.array([1.,0.,0.,0.,0.,1.,0.,0.,0.,soldier_hp,soldier_atk,soldier_atk_range,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,-1.])
+                                                state[target] = numpy.array([1.,0.,0.,0.,0.,1.,0.,0.,0.,SOLDIER_HP,SOLDIER_ATK,SOLDIER_ATK_RANGE,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,-1.])
                                             elif allay == PLAYER2:
-                                                state[target] = numpy.array([0.,1.,0.,0.,0.,1.,0.,0.,0.,soldier_hp,soldier_atk,soldier_atk_range,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,-1.])
+                                                state[target] = numpy.array([0.,1.,0.,0.,0.,1.,0.,0.,0.,SOLDIER_HP,SOLDIER_ATK,SOLDIER_ATK_RANGE,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,-1.])
                                         elif state[pos][BASE] == 1:
                                             if allay == PLAYER1:
-                                                state[target] = numpy.array([1.,0.,0.,0.,1.,0.,0.,0.,0.,worker_hp,worker_atk,woker_atk_range,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,-1.])
+                                                state[target] = numpy.array([1.,0.,0.,0.,1.,0.,0.,0.,0.,WORKER_HP,WORKER_ATK,WORKER_ATK_RANGE,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,-1.])
                                             elif allay == PLAYER2:
-                                                state[target] = numpy.array([0.,1.,0.,0.,1.,0.,0.,0.,0.,worker_hp,worker_atk,woker_atk_range,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,-1.])
+                                                state[target] = numpy.array([0.,1.,0.,0.,1.,0.,0.,0.,0.,WORKER_HP,WORKER_ATK,WORKER_ATK_RANGE,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,-1.])
                                         state[pos][PRODUCING] = 0
                                     
                                     state[pos][ACTIONUP] = 0
@@ -252,31 +254,35 @@ class RTSENV:
         plt.draw()
         plt.pause(0.3)
         plt.cla()
-                
-                        
+
+    def action_masks(self):
+        masks = numpy.zeros((self.num_envs,self.map_hight*self.map_width,NUMACTION))
+        
+        return masks  
+                       
 def init_map(vetor_map,num_env,h,w):
     states = numpy.zeros((num_env,h*w, NUMSTATE))
     for i in range(num_env):
         state = numpy.zeros((h*w, NUMSTATE))
         for j in range(h*w):
             if vetor_map[i][j]==WORKER1:
-                state[j]=numpy.array([1,0,0,0,1,0,0,0,0,worker_hp,worker_atk,woker_atk_range,0,0,0,0,0,0,0,0,0,0,-1])
+                state[j]=numpy.array([1,0,0,0,1,0,0,0,0,WORKER_HP,WORKER_ATK,WORKER_ATK_RANGE,0,0,0,0,0,0,0,0,0,0,-1])
             elif vetor_map[i][j]==SOLDIER1:
-                state[j]=numpy.array([1,0,0,0,0,1,0,0,0,soldier_hp,soldier_atk,soldier_atk_range,0,0,0,0,0,0,0,0,0,0,-1])
+                state[j]=numpy.array([1,0,0,0,0,1,0,0,0,SOLDIER_HP,SOLDIER_ATK,SOLDIER_ATK_RANGE,0,0,0,0,0,0,0,0,0,0,-1])
             elif vetor_map[i][j]==BASE1:
-                state[j]=numpy.array([1,0,0,0,0,0,1,0,0,base_hp,0,0,0,0,0,0,0,0,0,0,0,0,-1])
+                state[j]=numpy.array([1,0,0,0,0,0,1,0,0,BASE_HP,0,0,0,0,0,0,0,0,0,0,0,0,-1])
             elif vetor_map[i][j]==BARRACKS1:
-                state[j]=numpy.array([1,0,0,0,0,0,0,1,0,barracks_hp,0,0,0,0,0,0,0,0,0,0,0,0,-1])
+                state[j]=numpy.array([1,0,0,0,0,0,0,1,0,BARRACKS_HP,0,0,0,0,0,0,0,0,0,0,0,0,-1])
             elif vetor_map[i][j]==WORKER2:
-                state[j]=numpy.array([0,1,0,0,1,0,0,0,0,worker_hp,worker_atk,woker_atk_range,0,0,0,0,0,0,0,0,0,0,-1])
+                state[j]=numpy.array([0,1,0,0,1,0,0,0,0,WORKER_HP,WORKER_ATK,WORKER_ATK_RANGE,0,0,0,0,0,0,0,0,0,0,-1])
             elif vetor_map[i][j]==SOLDIER2:
-                state[j]=numpy.array([0,1,0,0,0,1,0,0,0,soldier_hp,soldier_atk,soldier_atk_range,0,0,0,0,0,0,0,0,0,0,-1])
+                state[j]=numpy.array([0,1,0,0,0,1,0,0,0,SOLDIER_HP,SOLDIER_ATK,SOLDIER_ATK_RANGE,0,0,0,0,0,0,0,0,0,0,-1])
             elif vetor_map[i][j]==BASE2:
-                state[j]=numpy.array([0,1,0,0,0,0,1,0,0,base_hp,0,0,0,0,0,0,0,0,0,0,0,0,-1])
+                state[j]=numpy.array([0,1,0,0,0,0,1,0,0,BASE_HP,0,0,0,0,0,0,0,0,0,0,0,0,-1])
             elif vetor_map[i][j]==BARRACKS2:
-                state[j]=numpy.array([0,1,0,0,0,0,0,1,0,barracks_hp,0,0,0,0,0,0,0,0,0,0,0,0,-1])
+                state[j]=numpy.array([0,1,0,0,0,0,0,1,0,BARRACKS_HP,0,0,0,0,0,0,0,0,0,0,0,0,-1])
             elif vetor_map[i][j]==RESOURCES:
-                state[j]=numpy.array([0.,0.,1.,0.,0.,0.,0.,0.,1.,0.,0.,0.,num_init_resource,0.,0.,0.,0.,0.,0.,0.,0.,0.,-1.])
+                state[j]=numpy.array([0.,0.,1.,0.,0.,0.,0.,0.,1.,0.,0.,0.,NUM_INTI_RESOURCE,0.,0.,0.,0.,0.,0.,0.,0.,0.,-1.])
             else:
                 state[j]=numpy.array([0.,0.,1.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,-1.])
         states[i] = state
