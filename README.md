@@ -2,6 +2,7 @@
 start the example with test_4x4.py
 ## states
 shape = (num_envs,map_height*map_width,grid_state)
+
 gird_state
   NUMSTATE
   PLAYER1
