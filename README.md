@@ -1,5 +1,5 @@
 # pyRTS
-start the example with test_4x4.py
+start the example with test_4x4.py or hello_world_lightrts.py
 ## states
 ![image](https://user-images.githubusercontent.com/66048062/228518275-96ddbe40-1d35-44ee-914f-fc0a9cbe329f.png)
 red:player1, bule: player2, circle: worker, green square: resource, green triangle: direction 
