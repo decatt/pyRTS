@@ -4,7 +4,7 @@ start the example with hello_world_lightrts.py
 <img width="425" alt="Screenshot lightRTS" src="https://user-images.githubusercontent.com/66048062/230066466-9fe5a7ca-86ac-4b16-92d6-9a2d4dbb11fc.png">
 
 ## States & Action
-states size: (num_envs,h*w, num_state_features)
+States size: (num_envs,h*w, num_state_features)
 
 
 Action size: (num_envs,h*w, num_action)
