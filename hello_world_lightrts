@@ -1,0 +1,36 @@
+import time
+import numpy
+import random
+from light_rts import LightRTS, init_map, random_map
+
+if __name__ == "__main__":
+    num_envs = 1
+    h = 8
+    w = 8
+    allay = 0
+
+    num_worker1 = 1
+    num_base1 = 0
+    num_resource = 1
+    non = h*w - num_resource - num_worker1 - num_base1
+
+    vector_map = random_map(num_envs=num_envs,non=non,worker1=num_worker1,base1 = num_base1,resource=num_resource)
+
+    init_states = init_map(vector_map,num_envs,h,w)
+
+    envs = LightRTS(num_envs,init_states,h,w)
+
+    start_time = time.time()
+    for _ in range(10000):
+        envs.render()
+        actions = numpy.zeros((num_envs,h*w,4))
+        allay_units = envs.get_allay_units()
+        for i in range(num_envs):
+            for unit in allay_units[i]:
+                lst = [[1,0,0,0], [0,1,0,0], [0,0,1,0], [0,0,0,1]]
+                action = random.choice(lst)
+                actions[i][unit] = action
+        envs.step(actions)
+    print(time.time()-start_time)
+
+
