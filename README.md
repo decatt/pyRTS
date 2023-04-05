@@ -1,7 +1,7 @@
 # LightRTS
 start the example with hello_world_lightrts.py
 ## Screenshot
-<img width="309" alt="Screenshot lightRTS" src="https://user-images.githubusercontent.com/66048062/230064046-bbfc3abb-61cb-4066-b4e6-1e4167682ee7.png">
+<img width="425" alt="Screenshot lightRTS" src="https://user-images.githubusercontent.com/66048062/230066466-9fe5a7ca-86ac-4b16-92d6-9a2d4dbb11fc.png">
 
 ## States & Action
 <table class="MsoTableGrid" border="1" cellspacing="0" cellpadding="0" align="left" style="border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
