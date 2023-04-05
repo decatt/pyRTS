@@ -4,6 +4,11 @@ start the example with hello_world_lightrts.py
 <img width="425" alt="Screenshot lightRTS" src="https://user-images.githubusercontent.com/66048062/230066466-9fe5a7ca-86ac-4b16-92d6-9a2d4dbb11fc.png">
 
 ## States & Action
+states size: (num_envs,h*w, num_state_features)
+
+
+Action size: (num_envs,h*w, num_action)
+
 <table class="MsoTableGrid" border="1" cellspacing="0" cellpadding="0" align="left" style="border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
  mso-yfti-tbllook:1184;mso-table-lspace:9.0pt;margin-left:6.75pt;mso-table-rspace:
  9.0pt;margin-right:6.75pt;mso-table-anchor-vertical:paragraph;mso-table-anchor-horizontal:
